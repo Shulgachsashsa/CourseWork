@@ -1,4 +1,4 @@
-package dto;
+package connect;
 
 import commands.CommandType;
 

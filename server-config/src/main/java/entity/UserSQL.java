@@ -31,9 +31,36 @@ public class UserSQL {
     @Column(name = "Role", nullable = false, columnDefinition = "varchar(3) default '0'")
     private String role;
 
+    public UserSQL(String username, String hashPassword, String salt, String access, String role) {
+        this.username = username;
+        this.hashPassword = hashPassword;
+        this.salt = salt;
+        this.access = access;
+        this.role = role;
+    }
+
     public UserSQL() {
-        access = "1";
-        role = "0";
+    }
+
+    @Override
+    public String toString() {
+        return "UserSQL{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", hashPassword='" + hashPassword + '\'' +
+                ", salt='" + salt + '\'' +
+                ", access='" + access + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    public UserSQL(Long id, String username, String hashPassword, String salt, String access, String role) {
+        this.id = id;
+        this.username = username;
+        this.hashPassword = hashPassword;
+        this.salt = salt;
+        this.access = access;
+        this.role = role;
     }
 
     public Long getId() {
