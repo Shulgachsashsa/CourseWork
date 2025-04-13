@@ -3,7 +3,8 @@ package network;
 import commands.CommandType;
 import connect.Request;
 import connect.Response;
-import dto.RegistrationDTO;
+import dto.UserDTO;
+import service_impl.AuthorizationServiceImpl;
 import service_impl.RegistrationServiceImpl;
 
 import java.io.IOException;
@@ -21,13 +22,13 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        try (ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-             ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream())) {
-            Request request = (Request) in.readObject();
-            Response response = processRequest(request);
-            out.writeObject(response);
-            out.flush();
-
+        try (ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())) {
+            while (true) {
+                Request request = (Request) in.readObject();
+                Response response = processRequest(request);
+                out.writeObject(response);
+            }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -39,12 +40,14 @@ public class ClientHandler implements Runnable {
         CommandType commandType = request.getCommand();
         switch (commandType) {
             case REGISTRATION: {
-                RegistrationDTO dateSet = (RegistrationDTO) request.getData();
+                UserDTO dateSet = (UserDTO) request.getData();
                 RegistrationServiceImpl registrationService = new RegistrationServiceImpl();
                 return registrationService.registration(dateSet);
             }
             case AUTHORIZATION: {
-
+                UserDTO dateSet = (UserDTO) request.getData();
+                AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
+                return authorizationService.authorization(dateSet);
             }
             default: {
                 return new Response(-1, null);

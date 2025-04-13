@@ -1,9 +1,11 @@
 package entity;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "users")
-public class UserSQL {
+public class UserSQL implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +42,8 @@ public class UserSQL {
     }
 
     public UserSQL() {
+        this.role = "1";
+        this.access = "1";
     }
 
     @Override

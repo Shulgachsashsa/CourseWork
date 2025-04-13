@@ -11,11 +11,11 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private static final int port = 12345;
+    private static final int PORT = 12345;
 
     public static void main(String args[]) throws IOException {
         ExecutorService pool = Executors.newCachedThreadPool();
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Сервер запущен! Ожидаю подключения...");
             while (true) {
                 Socket clientSocket = serverSocket.accept();

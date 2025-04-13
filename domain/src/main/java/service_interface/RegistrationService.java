@@ -1,7 +1,7 @@
 package service_interface;
 import connect.Response;
-import dto.RegistrationDTO;
+import dto.UserDTO;
 
 public interface RegistrationService {
-    Response registration(RegistrationDTO request);
+    Response registration(UserDTO request);
 }

@@ -1,23 +1,26 @@
 package service_impl;
 
 import connect.Response;
-import dto.RegistrationDTO;
+import dto.UserDTO;
 import entity.UserSQL;
 import service_interface.RegistrationService;
 import workWithHibernate.TransactionHibernate;
 
+import java.util.Random;
+
 public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
-    public Response registration(RegistrationDTO dto) {
+    public Response registration(UserDTO dto) {
         try {
             if (TransactionHibernate.findByUsername(dto.getLogin()) != null) {
                 return new Response(1, "Логин уже занят");
             }
             UserSQL newUser = new UserSQL();
             newUser.setUsername(dto.getLogin());
-            newUser.setHashPassword(hashPassword(dto.getPassword()));
-            newUser.setSalt(generateSalt());
+            String salt = generateSalt();
+            newUser.setHashPassword(hashPassword(dto.getPassword(), salt));
+            newUser.setSalt(salt);
             TransactionHibernate.addUser(newUser);
             return new Response(0, "Регистрация успешна");
         } catch (Exception e) {
@@ -25,11 +28,17 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
     }
 
-    private String hashPassword(String password) {
-        return password + "_hashed";
+    public static String hashPassword(String password, String salt) {
+        int hash = 7;
+        String saltInput = password + salt;
+        for (int i = 0; i < saltInput.length(); i++) {
+            hash = hash * 31 + saltInput.charAt(i);
+        }
+        return String.valueOf(hash);
     }
 
     private String generateSalt() {
-        return "random_salt";
+        Random random = new Random();
+        return String.valueOf(100_00 + random.nextInt(9_900_000));
     }
 }

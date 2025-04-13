@@ -2,12 +2,12 @@ package dto;
 
 import java.io.Serializable;
 
-public class RegistrationDTO implements Serializable {
+public class UserDTO implements Serializable {
 
     public String login;
     public String password;
 
-    public RegistrationDTO(String login, String password) {
+    public UserDTO(String login, String password) {
         this.login = login;
         this.password = password;
     }
