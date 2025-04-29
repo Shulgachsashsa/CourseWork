@@ -5,12 +5,18 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/manage_budget</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/workww</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">150798710</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <property name="hibernate.show_sql">true</property>
-        <mapping class="entity.UserSQL"/>
+        <mapping class="entity.Clothes"/>
+        <mapping class="entity.Transaction"/>
+        <mapping class="entity.User"/>
+        <mapping class="entity.Budget"/>
+        <mapping class="entity.InventoryLog"/>
+        <mapping class="entity.Request"/>
+
     </session-factory>
 </hibernate-configuration>

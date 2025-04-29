@@ -1,8 +1,5 @@
 package network;
 
-import entity.UserSQL;
-import workWithHibernate.TransactionHibernate;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

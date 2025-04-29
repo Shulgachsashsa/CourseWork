@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientHandler implements Runnable {
 
@@ -24,13 +25,19 @@ public class ClientHandler implements Runnable {
     public void run() {
         try (ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
                 ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream())) {
-            while (true) {
-                Request request = (Request) in.readObject();
-                Response response = processRequest(request);
-                out.writeObject(response);
+            while (!clientSocket.isClosed()) {
+                try {
+                    Request request = (Request) in.readObject();
+                    Response response = processRequest(request);
+                    out.writeObject(response);
+                } catch (ClassNotFoundException e) {
+                    System.err.println("Ошибка десериализации запроса: " + e.getMessage());
+                    break;
+                } catch (SocketException e) {
+                    System.err.println("Клиент " + clientSocket.getInetAddress() + " отключился!");
+                    break;
+                }
             }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             e.printStackTrace();
         }

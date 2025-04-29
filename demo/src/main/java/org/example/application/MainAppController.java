@@ -45,6 +45,7 @@ public class MainAppController {
             String password = password_field.getText();
             if (login.isEmpty() || password.isEmpty()) {
                 showAlert("Ошибка","Поля не могут быть пустыми!");
+                return;
             }
             UserDTO dto = new UserDTO(login, password);
             Request request = new Request(CommandType.AUTHORIZATION, dto);
@@ -102,7 +103,7 @@ public class MainAppController {
             stage.show();
 
         } catch (IOException e) {
-            showAlert("Ошибка", "Не удалось загрузить главное меню");
+            showAlert("Ошибка", "Не удалось загрузить меню администратора");
             e.printStackTrace();
         }
     }

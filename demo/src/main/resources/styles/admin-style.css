@@ -1,0 +1,87 @@
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 10;
+}
+
+.title-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.content-box {
+    -fx-padding: 15;
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.form-box {
+    -fx-padding: 15;
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-min-width: 300;
+}
+
+.form-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #444444;
+}
+
+.user-table {
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3;
+}
+
+.user-table .table-row-cell {
+    -fx-cell-size: 35px;
+}
+
+.user-table .table-row-cell:selected {
+    -fx-background-color: #e0e0ff;
+}
+
+.action-button {
+    -fx-background-color: #4a8bc9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+.action-button:hover {
+    -fx-background-color: #3a7bb9;
+}
+
+.danger-button {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+.danger-button:hover {
+    -fx-background-color: #c9433f;
+}
+
+.save-button {
+    -fx-background-color: #5cb85c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+.save-button:hover {
+    -fx-background-color: #4ca84c;
+}
+
+.status-bar {
+    -fx-padding: 5 10;
+    -fx-background-color: #eaeaea;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1 0 0 0;
+    -fx-font-style: italic;
+}

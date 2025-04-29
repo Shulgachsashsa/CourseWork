@@ -2,7 +2,7 @@ package service_impl;
 
 import connect.Response;
 import dto.UserDTO;
-import entity.UserSQL;
+import entity.User;
 import service_interface.RegistrationService;
 import workWithHibernate.TransactionHibernate;
 
@@ -16,10 +16,10 @@ public class RegistrationServiceImpl implements RegistrationService {
             if (TransactionHibernate.findByUsername(dto.getLogin()) != null) {
                 return new Response(1, "Логин уже занят");
             }
-            UserSQL newUser = new UserSQL();
-            newUser.setUsername(dto.getLogin());
+            User newUser = new User();
+            newUser.setName(dto.getLogin());
             String salt = generateSalt();
-            newUser.setHashPassword(hashPassword(dto.getPassword(), salt));
+            newUser.setHash(hashPassword(dto.getPassword(), salt));
             newUser.setSalt(salt);
             TransactionHibernate.addUser(newUser);
             return new Response(0, "Регистрация успешна");
