@@ -15,9 +15,7 @@ public class Response implements Serializable {
         return state;
     }
 
-    public Object getData() {
-        return data;
-    }
+    public Object getData() { return data; }
 
     public void setState(int state) {
         this.state = state;

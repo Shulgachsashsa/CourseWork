@@ -29,10 +29,26 @@ public class TransactionHibernate {
     }
 
     public static List<User> findAllUsers() {
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             return session.createNativeQuery("SELECT * FROM users", User.class)
                     .getResultList();
         }
+    }
+
+    public static boolean deleteUserByName(String name) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            int deletedCount = session.createNativeQuery("DELETE FROM users WHERE name = :name")
+                    .setParameter("name", name).executeUpdate();
+            transaction.commit();
+            if (deletedCount > 0)
+                return true;
+            else
+                return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

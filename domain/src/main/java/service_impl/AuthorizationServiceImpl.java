@@ -30,11 +30,14 @@ public class AuthorizationServiceImpl {
         List<User> users = TransactionHibernate.findAllUsers();
         List<UserDTO> userDTO = new ArrayList<>();
         for (User user: users) {
-            System.out.println(user.getName());
             UserDTO userDTO1 = new UserDTO(user.getName(), user.getHash(), user.getSalt(), user.getAccess(), user.getRole());
             userDTO.add(userDTO1);
         }
         return new Response(1, userDTO);
+    }
+
+    public Response deleteUser(String login) {
+        return new Response(1, TransactionHibernate.deleteUserByName(login));
     }
 
 }

@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.application.AdminDeleteController"
-            prefHeight="400.0" prefWidth="700.0">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.application.AdminDeleteController"
+      spacing="10"
+      style="-fx-padding: 10; -fx-background-color: #f5f5f5;">
 
-</AnchorPane>
+    <Label text="Список пользователей"
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"
+           alignment="CENTER"
+           maxWidth="Infinity"/>
+
+    <TableView fx:id="userTable" style="-fx-font-size: 14px;" prefWidth="700" prefHeight="400">
+        <columns>
+            <TableColumn text="Login" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="login"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Hash" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="password"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Salt" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="salt"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Access" prefWidth="50">
+                <cellValueFactory><PropertyValueFactory property="access"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Role" prefWidth="150">
+                <cellValueFactory><PropertyValueFactory property="role"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="deleteButton" text="Удалить" onAction="#handleDelete"
+                style="-fx-background-color: #ff4444; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Button text="Назад" onAction="#handleBack"
+                style="-fx-background-color: #4a8bc9; -fx-text-fill: white; -fx-font-weight: bold;"
+                alignment="CENTER"
+                maxWidth="Infinity"/>
+    </HBox>
+</VBox>

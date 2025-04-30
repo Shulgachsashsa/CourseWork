@@ -57,9 +57,13 @@ public class ClientHandler implements Runnable {
                 return authorizationService.authorization(dateSet);
             }
             case FULL_LIST_USERS: {
-                UserDTO dataset = (UserDTO) request.getData();
                 AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
                 return authorizationService.getListUsers();
+            }
+            case DELETE_USER: {
+                String dataset = (String) request.getData();
+                AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
+                return authorizationService.deleteUser(dataset);
             }
             default: {
                 return new Response(-1, null);

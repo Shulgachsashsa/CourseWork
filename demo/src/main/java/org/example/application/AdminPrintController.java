@@ -72,7 +72,7 @@ public class AdminPrintController {
                 userData.addAll(userDTO);
             }
         } else {
-            showAlert("Ошибка", "Неизвестный отвеjjт сервера");
+            showAlert("Ошибка", "Неизвестный ответ сервера");
         }
     }
 
