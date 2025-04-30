@@ -56,6 +56,11 @@ public class ClientHandler implements Runnable {
                 AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
                 return authorizationService.authorization(dateSet);
             }
+            case FULL_LIST_USERS: {
+                UserDTO dataset = (UserDTO) request.getData();
+                AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
+                return authorizationService.getListUsers();
+            }
             default: {
                 return new Response(-1, null);
             }

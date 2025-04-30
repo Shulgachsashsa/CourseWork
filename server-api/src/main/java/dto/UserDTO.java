@@ -1,7 +1,8 @@
 package dto;
 
-import javax.management.relation.Role;
 import java.io.Serializable;
+import enums.Role;
+
 
 public class UserDTO implements Serializable {
 
@@ -9,7 +10,7 @@ public class UserDTO implements Serializable {
     public String password;
     public String salt;
     public String access;
-    public Role role;
+    private Role role;
 
     public UserDTO(String login, String password) {
         this.login = login;
@@ -23,6 +24,8 @@ public class UserDTO implements Serializable {
         this.access = access;
         this.role = role;
     }
+
+    public UserDTO() {}
 
     public String getLogin() {
         return login;
@@ -40,4 +43,27 @@ public class UserDTO implements Serializable {
         this.password = password;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getAccess() {
+        return access;
+    }
+
+    public void setAccess(String access) {
+        this.access = access;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

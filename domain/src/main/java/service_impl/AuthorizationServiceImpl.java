@@ -5,6 +5,10 @@ import dto.UserDTO;
 import entity.User;
 import workWithHibernate.TransactionHibernate;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AuthorizationServiceImpl {
 
     public Response authorization(UserDTO dto) {
@@ -21,4 +25,16 @@ public class AuthorizationServiceImpl {
         }
 
     }
+
+    public Response getListUsers() {
+        List<User> users = TransactionHibernate.findAllUsers();
+        List<UserDTO> userDTO = new ArrayList<>();
+        for (User user: users) {
+            System.out.println(user.getName());
+            UserDTO userDTO1 = new UserDTO(user.getName(), user.getHash(), user.getSalt(), user.getAccess(), user.getRole());
+            userDTO.add(userDTO1);
+        }
+        return new Response(1, userDTO);
+    }
+
 }

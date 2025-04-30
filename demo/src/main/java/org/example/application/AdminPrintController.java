@@ -1,17 +1,29 @@
 package org.example.application;
 
+import commands.CommandType;
+import connect.Request;
+import connect.Response;
 import dto.UserDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import enums.Role;
 
-import javax.management.relation.Role;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.*;
+import java.util.stream.Collectors;
+
+import static org.example.application.MainApp.getIn;
+import static org.example.application.MainApp.getOut;
 
 public class AdminPrintController {
 
@@ -29,16 +41,64 @@ public class AdminPrintController {
     }
 
     private void initializeTestData() {
-        userData.addAll(new UserDTO("aa", "aa", "fdfd", "11", ));
-        userData.addAll(new UserDTO("aa", "aa"));
-        userData.addAll(new UserDTO("aa", "aa"));
-        userData.addAll(new UserDTO("aa", "aa"));
+        UserDTO dto = new UserDTO();
+        Request request = new Request(CommandType.FULL_LIST_USERS, dto);
+        Response response;
 
+        try {
+            getOut().writeObject(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            response = (Response) getIn().readObject();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (response.getState() == 1) {
+            Object data = response.getData();
+            List<UserDTO> users = new ArrayList<>();
+            if (data instanceof List<?>) {
+                users = ((List<?>) data).stream()
+                        .filter(obj -> obj instanceof UserDTO)
+                        .map(obj -> (UserDTO) obj)
+                        .collect(Collectors.toList());
+            }
+            for (UserDTO userDTO: users) {
+                userData.addAll(userDTO);
+            }
+        } else {
+            showAlert("Ошибка", "Неизвестный отвеjjт сервера");
+        }
     }
 
     @FXML
     private void handleBack() {
-        Stage stage = (Stage) userTable.getScene().getWindow();
-        stage.close();
+        try {
+            Stage stage = (Stage) userTable.getScene().getWindow();
+            stage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin-view.fxml"));
+            Parent root = loader.load();
+            stage.setTitle("Меню администратора");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Ошибка", "Не удалось загрузить представление учетных записей!");
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
+
+

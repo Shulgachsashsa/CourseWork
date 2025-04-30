@@ -12,33 +12,34 @@
       style="-fx-padding: 10; -fx-background-color: #f5f5f5;">
 
     <Label text="Список пользователей"
-           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"
+           alignment="CENTER"
+           maxWidth="Infinity"/>
 
     <TableView fx:id="userTable" style="-fx-font-size: 14px;" prefWidth="700" prefHeight="400">
         <columns>
-            <TableColumn text="ID" prefWidth="50">
-                <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
-            </TableColumn>
             <TableColumn text="Login" prefWidth="150">
-                <cellValueFactory><PropertyValueFactory property="username"/></cellValueFactory>
+                <cellValueFactory><PropertyValueFactory property="login"/></cellValueFactory>
             </TableColumn>
             <TableColumn text="Hash" prefWidth="150">
-                <cellValueFactory><PropertyValueFactory property="email"/></cellValueFactory>
+                <cellValueFactory><PropertyValueFactory property="password"/></cellValueFactory>
             </TableColumn>
             <TableColumn text="Salt" prefWidth="150">
-                <cellValueFactory><PropertyValueFactory property="role"/></cellValueFactory>
+                <cellValueFactory><PropertyValueFactory property="salt"/></cellValueFactory>
             </TableColumn>
             <TableColumn text="Access" prefWidth="50">
-                <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
+                <cellValueFactory><PropertyValueFactory property="access"/></cellValueFactory>
             </TableColumn>
             <TableColumn text="Role" prefWidth="150">
-                <cellValueFactory><PropertyValueFactory property="status"/></cellValueFactory>
+                <cellValueFactory><PropertyValueFactory property="role"/></cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
 
     <HBox spacing="10" alignment="CENTER_RIGHT">
         <Button text="Назад" onAction="#handleBack"
-                style="-fx-background-color: #4a8bc9; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                style="-fx-background-color: #4a8bc9; -fx-text-fill: white; -fx-font-weight: bold;"
+                alignment="CENTER"
+                maxWidth="Infinity"/>
     </HBox>
 </VBox>

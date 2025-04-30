@@ -1,17 +1,13 @@
 package workWithHibernate;
 
 import entity.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
+import java.util.List;
+
+import java.awt.*;
 
 public class TransactionHibernate {
     private static Configuration configuration = new Configuration().configure();
@@ -29,6 +25,13 @@ public class TransactionHibernate {
         try (Session session = sessionFactory.openSession()) {
             return session.createNativeQuery("SELECT *FROM users WHERE name = :name", User.class)
                     .setParameter("name", name).getSingleResultOrNull();
+        }
+    }
+
+    public static List<User> findAllUsers() {
+        try (Session session = sessionFactory.openSession()){
+            return session.createNativeQuery("SELECT * FROM users", User.class)
+                    .getResultList();
         }
     }
 

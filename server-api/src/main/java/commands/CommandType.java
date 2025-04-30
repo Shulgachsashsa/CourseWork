@@ -2,5 +2,6 @@ package commands;
 
 public enum CommandType {
     REGISTRATION,
-    AUTHORIZATION
+    AUTHORIZATION,
+    FULL_LIST_USERS
 }
