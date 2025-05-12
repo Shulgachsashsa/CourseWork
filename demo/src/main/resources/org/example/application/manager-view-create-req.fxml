@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.application.ManagerCreateRequestController">
+    <Label layoutX="20.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Создание запроса на выделение средств" />
+    <Line endX="710.0" endY="0.0" layoutX="20.0" layoutY="60.0" startX="0.0" startY="0.0" style="-fx-stroke: #bdc3c7; -fx-stroke-width: 1px;" />
+
+    <VBox layoutX="20.0" layoutY="80.0" prefWidth="710.0" spacing="15">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-min-width: 150;" text="Тип запроса:" />
+            <RadioButton fx:id="moneyRadio" selected="true" style="-fx-font-size: 14px;" text="Денежные средства">
+                <toggleGroup>
+                    <ToggleGroup fx:id="requestTypeGroup" />
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="clothesRadio" style="-fx-font-size: 14px;" text="Одежда" toggleGroup="$requestTypeGroup" />
+        </HBox>
+
+        <VBox fx:id="moneySection" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-min-width: 150;" text="Сумма:" />
+                <TextField fx:id="amountField" prefWidth="200.0" promptText="Введите сумму">
+                    <tooltip>
+                        <Tooltip text="Укажите сумму в рублях" />
+                    </tooltip>
+                </TextField>
+            </HBox>
+        </VBox>
+
+        <VBox fx:id="clothesSection" managed="false" spacing="15" visible="false">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-min-width: 150;" text="Тип одежды:" />
+                <ComboBox fx:id="clothesTypeCombo" prefWidth="200.0" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-min-width: 150;" text="Количество:" />
+                <TextField fx:id="quantityField" prefWidth="80.0" promptText="Кол-во" />
+                <Label fx:id="availableLabel" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                <Label fx:id="priceLabel" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                <Button fx:id="addClothesButton" style="-fx-background-color: #3498db; -fx-text-fill: white;" text="Добавить" />
+            </HBox>
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Список запрашиваемой одежды:" />
+            <TableView fx:id="clothesTable" prefHeight="150.0">
+                <columns>
+                    <TableColumn prefWidth="200.0" text="Тип">
+                        <cellValueFactory><PropertyValueFactory property="type" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn prefWidth="100.0" text="Количество">
+                        <cellValueFactory><PropertyValueFactory property="quantity" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn prefWidth="100.0" text="Цена за ед.">
+                        <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn prefWidth="100.0" text="Итого">
+                        <cellValueFactory><PropertyValueFactory property="totalPrice" /></cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-min-width: 150;" text="Причина:" />
+            <TextArea fx:id="reasonField" prefHeight="100.0" prefWidth="500.0" promptText="Опишите цель запроса" />
+        </HBox>
+
+        <HBox alignment="CENTER_RIGHT" spacing="20" style="-fx-padding: 20 0 0 0;">
+            <Button fx:id="cancelButton" onAction="#handleCancel" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;" text="Назад" />
+            <Button fx:id="submitButton" onAction="#handleSubmit" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px;" text="Создать запрос" />
+        </HBox>
+    </VBox>
+
+    <Label layoutX="20.0" layoutY="550.0" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-font-style: italic;" text="Запрос будет отправлен на рассмотрение бухгалтерии" />
+</AnchorPane>

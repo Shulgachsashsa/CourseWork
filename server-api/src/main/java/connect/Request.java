@@ -8,6 +8,10 @@ public class Request implements Serializable {
     private CommandType command;
     private Object data;
 
+    public Request(CommandType command) {
+        this.command = command;
+    }
+
     public Request(CommandType command, Object data) {
         this.command = command;
         this.data = data;

@@ -14,6 +14,7 @@ public class MainApp extends Application {
     private static Socket socket;
     private static ObjectOutputStream out;
     private static ObjectInputStream in;
+    public static String username;
 
     @Override
     public void start(Stage stage) throws IOException {

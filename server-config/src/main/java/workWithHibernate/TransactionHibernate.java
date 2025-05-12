@@ -5,9 +5,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.HashMap;
 import java.util.List;
 
 import java.awt.*;
+import java.util.Map;
+import java.util.Objects;
 
 public class TransactionHibernate {
     private static Configuration configuration = new Configuration().configure();
@@ -25,6 +29,13 @@ public class TransactionHibernate {
         try (Session session = sessionFactory.openSession()) {
             return session.createNativeQuery("SELECT *FROM users WHERE name = :name", User.class)
                     .setParameter("name", name).getSingleResultOrNull();
+        }
+    }
+
+    public static User findByID(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createNativeQuery("SELECT *FROM users WHERE id = :id", User.class)
+                    .setParameter("id", id).getSingleResultOrNull();
         }
     }
 
@@ -50,5 +61,37 @@ public class TransactionHibernate {
         }
         return false;
     }
+
+    public static List<Clothes> getClothes() {
+        try (Session session = sessionFactory.openSession()){
+            return session.createNativeQuery("SELECT * FROM clothes", Clothes.class)
+                    .getResultList();
+        }
+    }
+
+    public static void createRequestOnTheClothes(Request request) {
+        try (Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            session.persist(request);
+            transaction.commit();
+        }
+    }
+
+    public static void createRequestOnTheBudget(Request request) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.persist(request);
+            transaction.commit();
+        }
+    }
+
+    public static void addReqOnTheLog(RequestHistory requestHistory) {
+        try (Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            session.persist(requestHistory);
+            transaction.commit();
+        }
+    }
+
 
 }

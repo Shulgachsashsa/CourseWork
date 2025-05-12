@@ -25,6 +25,13 @@ public class UserDTO implements Serializable {
         this.role = role;
     }
 
+    public UserDTO(String login, String password, String access, Role role) {
+        this.login = login;
+        this.password = password;
+        this.access = access;
+        this.role = role;
+    }
+
     public UserDTO() {}
 
     public String getLogin() {

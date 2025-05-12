@@ -12,10 +12,10 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="entity.Clothes"/>
-        <mapping class="entity.Transaction"/>
+        <mapping class="entity.FinancialHistory"/>
         <mapping class="entity.User"/>
         <mapping class="entity.Budget"/>
-        <mapping class="entity.InventoryLog"/>
+        <mapping class="entity.RequestHistory"/>
         <mapping class="entity.Request"/>
 
     </session-factory>

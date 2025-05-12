@@ -21,6 +21,8 @@ public class RegistrationServiceImpl implements RegistrationService {
             String salt = generateSalt();
             newUser.setHash(hashPassword(dto.getPassword(), salt));
             newUser.setSalt(salt);
+            newUser.setRole(dto.getRole());
+            newUser.setAccess(dto.getAccess());
             TransactionHibernate.addUser(newUser);
             return new Response(0, "Регистрация успешна");
         } catch (Exception e) {

@@ -8,6 +8,7 @@ import commands.CommandType;
 import connect.Request;
 import connect.Response;
 import dto.UserDTO;
+import enums.Role;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,8 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import static org.example.application.MainApp.getIn;
-import static org.example.application.MainApp.getOut;
+import static org.example.application.MainApp.*;
 
 public class MainAppController {
 
@@ -70,7 +70,12 @@ public class MainAppController {
                     break;
                 }
                 case 1: {
-                    loadMainMenuAdmin();
+                    username = login;
+                    switch ((Role)response.getData()) {
+                        case Role.ADMIN -> loadMainMenuAdmin();
+                        case Role.ACCOUNTANT -> loadMainMenuAccountant();
+                        case Role.MANAGER -> loadMainMenuManager();
+                    }
                     break;
                 }
                 default: {
@@ -94,14 +99,44 @@ public class MainAppController {
         try {
             Stage currentStage = (Stage) signInButton.getScene().getWindow();
             currentStage.close();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("admin-view.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Меню администратора");
             stage.setScene(new Scene(root));
             stage.show();
+        } catch (IOException e) {
+            showAlert("Ошибка", "Не удалось загрузить меню администратора");
+            e.printStackTrace();
+        }
+    }
 
+    private void loadMainMenuManager() {
+        try {
+            Stage currentStage = (Stage) signInButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("manager-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Меню менеджера");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Ошибка", "Не удалось загрузить меню менеджера");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMainMenuAccountant() {
+        try {
+            Stage currentStage = (Stage) signInButton.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("accountant-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Меню бухгалтера");
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             showAlert("Ошибка", "Не удалось загрузить меню администратора");
             e.printStackTrace();

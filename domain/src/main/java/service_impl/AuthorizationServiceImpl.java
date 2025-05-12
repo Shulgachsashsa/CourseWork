@@ -16,14 +16,18 @@ public class AuthorizationServiceImpl {
             User user = TransactionHibernate.findByUsername(dto.getLogin());
             System.out.println(user.getName());
             String passwordCheck = RegistrationServiceImpl.hashPassword(dto.getPassword(), user.getSalt());
-            if (user != null && passwordCheck.equals(user.getHash())) {
-                return new Response(1, true); // добавить передачу роли и доступа
+            if (user != null && passwordCheck.equals(user.getHash()) && user.getAccess().equals("1")) {
+                return new Response(1, user.getRole());
             } else
                 return new Response(0, false);
         } catch (Exception e) {
             return new Response(-1, "Ошибка сервера: " + e.getMessage());
         }
+    }
 
+    public Response getID(String username) {
+        User user = TransactionHibernate.findByUsername(username);
+        return new Response(1, user.getId());
     }
 
     public Response getListUsers() {

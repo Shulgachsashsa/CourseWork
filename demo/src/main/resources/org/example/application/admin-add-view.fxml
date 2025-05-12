@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.application.AdminAddController"
-            prefHeight="400.0" prefWidth="700.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.application.AdminAddController">
+   <ImageView fitHeight="281.0" fitWidth="298.0" layoutX="378.0" layoutY="100.0">
+      <image>
+         <Image url="@../../../images/fs-removebg-preview.png" />
+      </image>
+   </ImageView>
+   <Label layoutX="40.0" layoutY="147.0" text="Логин:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="40.0" layoutY="198.0" text="Пароль:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label layoutX="40.0" layoutY="246.0" text="Роль:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="roleComboBox" layoutX="115.0" layoutY="240.0" prefHeight="34.0" prefWidth="222.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Менеджер" />
+            <String fx:value="Бухгалтер" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <Label layoutX="42.0" layoutY="297.0" text="Доступ:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="accessComboBox" layoutX="115.0" layoutY="291.0" prefHeight="34.0" prefWidth="222.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Разрешен" />
+            <String fx:value="Не разрешен" />
+         </FXCollections>
+      </items>
+   </ComboBox>
+   <Button fx:id="createButton" layoutX="42.0" layoutY="350.0" onAction="#handleCreateUser" prefHeight="34.0" prefWidth="297.0" style="-fx-background-color: #2F4F4F; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="Создать" />
+   <Label fx:id="messageLabel" layoutX="10.0" layoutY="10.0" style="-fx-text-fill: red;" />
+   <AnchorPane layoutX="-1.0" prefHeight="106.0" prefWidth="706.0" style="-fx-background-color: #2F4F4F;">
+      <children>
+           <Label layoutX="185.0" layoutY="38.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Добавление нового пользователя" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Label>
+      </children>
+   </AnchorPane>
+   <Button fx:id="buttonBack" layoutX="371.0" layoutY="350.0" onAction="#handleCreateUser" prefHeight="34.0" prefWidth="298.0" style="-fx-background-color: #2F4F4F; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;" text="Назад" />
+   <TextField fx:id="usernameField" layoutX="115.0" layoutY="140.0" prefHeight="34.0" prefWidth="222.0" />
+   <TextField fx:id="passwordField" layoutX="115.0" layoutY="191.0" prefHeight="34.0" prefWidth="222.0" />
 </AnchorPane>

@@ -1,5 +1,6 @@
 package entity;
 
+import enums.ClothesType;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,24 +10,21 @@ public class Clothes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "jeans", nullable = false)
-    private Integer jeans = 0;
+    @Column(name = "counter", nullable = false)
+    private Integer counter = 0;
 
-    @Column(name = "t_shirt", nullable = false)
-    private Integer tShirt = 0;
+    @Column(name = "type", nullable = false, length = 100)
+    private String clothesType;
 
-    @Column(name = "hoodie", nullable = false)
-    private Integer hoodie = 0;
+    @Column(name = "price_for_1", nullable = false)
+    private Double price;
 
-    @Column(name = "zip_hoodie", nullable = false)
-    private Integer zipHoodie = 0;
+    public Clothes() {}
 
-    public Clothes(Long id, Integer jeans, Integer tShirt, Integer hoodie, Integer zipHoodie) {
+    public Clothes(Long id, Integer counter, String clothesType) {
         this.id = id;
-        this.jeans = jeans;
-        this.tShirt = tShirt;
-        this.hoodie = hoodie;
-        this.zipHoodie = zipHoodie;
+        this.counter = counter;
+        this.clothesType = clothesType;
     }
 
     public Long getId() {
@@ -37,37 +35,27 @@ public class Clothes {
         this.id = id;
     }
 
-    public Integer getJeans() {
-        return jeans;
+    public Integer getCounter() {
+        return counter;
     }
 
-    public void setJeans(Integer jeans) {
-        this.jeans = jeans;
+    public void setCounter(Integer counter) {
+        this.counter = counter;
     }
 
-    public Integer gettShirt() {
-        return tShirt;
+    public String getClothesType() {
+        return clothesType;
     }
 
-    public void settShirt(Integer tShirt) {
-        this.tShirt = tShirt;
+    public void setClothesType(String clothesType) {
+        this.clothesType = clothesType;
     }
 
-    public Integer getHoodie() {
-        return hoodie;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setHoodie(Integer hoodie) {
-        this.hoodie = hoodie;
+    public void setPrice(Double price) {
+        this.price = price;
     }
-
-    public Integer getZipHoodie() {
-        return zipHoodie;
-    }
-
-    public void setZipHoodie(Integer zipHoodie) {
-        this.zipHoodie = zipHoodie;
-    }
-
-    public Clothes() {}
 }
