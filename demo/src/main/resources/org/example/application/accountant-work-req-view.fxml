@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.application.AccountantWorkWithRequestsController"
+      spacing="10"
+      style="-fx-padding: 10;">
+
+    <Label text="Управление запросами" style="-fx-font-weight: bold;">
+        <font>
+            <Font size="16"/>
+        </font>
+    </Label>
+
+    <TableView fx:id="requestsTable" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="userColumn" text="Пользователь" prefWidth="100"/>
+            <TableColumn fx:id="typeColumn" text="Тип запроса" prefWidth="100"/>
+            <TableColumn fx:id="amountColumn" text="Сумма" prefWidth="100"/>
+            <TableColumn fx:id="detailsColumn" text="Детали одежды" prefWidth="150"/>
+            <TableColumn fx:id="statusColumn" text="Статус" prefWidth="150"/>
+            <TableColumn fx:id="reasonColumn" text="Комментарий" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <Button fx:id="saveButton" text="Сохранить изменения"/>
+        <Button fx:id="refreshButton" text="Обновить"/>
+        <Button fx:id="backButton" text="Назад"/>
+    </HBox>
+</VBox>

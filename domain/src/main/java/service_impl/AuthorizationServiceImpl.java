@@ -4,16 +4,16 @@ import connect.Response;
 import dto.UserDTO;
 import entity.User;
 import workWithHibernate.TransactionHibernate;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static workWithHibernate.TransactionHibernate.*;
 
 public class AuthorizationServiceImpl {
 
     public Response authorization(UserDTO dto) {
         try {
-            User user = TransactionHibernate.findByUsername(dto.getLogin());
+            User user = findByUsername(dto.getLogin());
             System.out.println(user.getName());
             String passwordCheck = RegistrationServiceImpl.hashPassword(dto.getPassword(), user.getSalt());
             if (user != null && passwordCheck.equals(user.getHash()) && user.getAccess().equals("1")) {
@@ -26,7 +26,7 @@ public class AuthorizationServiceImpl {
     }
 
     public Response getID(String username) {
-        User user = TransactionHibernate.findByUsername(username);
+        User user = findByUsername(username);
         return new Response(1, user.getId());
     }
 
@@ -41,7 +41,16 @@ public class AuthorizationServiceImpl {
     }
 
     public Response deleteUser(String login) {
-        return new Response(1, TransactionHibernate.deleteUserByName(login));
+        return new Response(1, deleteUserByName(login));
+    }
+
+    public Response editAccess(UserDTO userDTO) {
+        try {
+            TransactionHibernate.updateUserAccess(userDTO.getLogin(), Integer.parseInt(userDTO.getAccess()));
+            return new Response(1, "true");
+        } catch (Exception e) {
+            return new Response(-1, "false");
+        }
     }
 
 }

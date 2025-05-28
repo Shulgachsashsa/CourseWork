@@ -9,7 +9,7 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">150798710</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="entity.Clothes"/>
         <mapping class="entity.FinancialHistory"/>
@@ -17,6 +17,5 @@
         <mapping class="entity.Budget"/>
         <mapping class="entity.RequestHistory"/>
         <mapping class="entity.Request"/>
-
     </session-factory>
 </hibernate-configuration>

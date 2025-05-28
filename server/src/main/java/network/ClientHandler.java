@@ -3,11 +3,11 @@ package network;
 import commands.CommandType;
 import connect.Request;
 import connect.Response;
+import dto.FinancialHistoryDTO;
 import dto.RequestDTO;
+import dto.RequestHistoryDTO;
 import dto.UserDTO;
-import service_impl.AuthorizationServiceImpl;
-import service_impl.RegistrationServiceImpl;
-import service_impl.WorkWithClothesImpl;
+import service_impl.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -85,6 +85,59 @@ public class ClientHandler implements Runnable {
                 RequestDTO dataset = (RequestDTO) request.getData();
                 WorkWithClothesImpl workWithClothes = new WorkWithClothesImpl();
                 return workWithClothes.createRequestOnTheBudget(dataset);
+            }
+            case GET_REQUEST_BY_ID: {
+                Long dataset = (Long) request.getData();
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.getListReqById(dataset);
+            }
+            case MINES_CLOTHES: {
+                String data = (String) request.getData();
+                WorkWithClothesImpl workWithClothes = new WorkWithClothesImpl();
+                return workWithClothes.minesClothes(data);
+            }
+            case UPDATE_USER_ACCESS: {
+                UserDTO userDTO = (UserDTO) request.getData();
+                AuthorizationServiceImpl authorizationService = new AuthorizationServiceImpl();
+                return authorizationService.editAccess(userDTO);
+            }
+            case GET_REQUESTS_WITH_STATE_PENDING: {
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.getListReq();
+            }
+            case SET_STATE_REQUEST: {
+                RequestDTO requestDTO = (RequestDTO) request.getData();
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.setNewStateRequestByID(requestDTO);
+            }
+            case SET_NEW_REQ_HISTORY: {
+                RequestHistoryDTO requestHistoryDTO = (RequestHistoryDTO) request.getData();
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.setNewReqHistory(requestHistoryDTO);
+            }
+            case GET_BUDGET: {
+                WorkWithBudgetImpl workWithBudget = new WorkWithBudgetImpl();
+                return workWithBudget.getBudget();
+            }
+            case GET_TOTAL_PRICE_CLOTHES: {
+                Long id = (Long) request.getData();
+                WorkWithBudgetImpl workWithBudget = new WorkWithBudgetImpl();
+                return workWithBudget.getTotalPrice(id);
+            }
+            case ADD_BUDGET: {
+                Double total = (Double) request.getData();
+                WorkWithBudgetImpl workWithBudget = new WorkWithBudgetImpl();
+                return workWithBudget.addBudget(total);
+            }
+            case SAVE_FINANCIAL_HISTORY: {
+                FinancialHistoryDTO financialHistoryDTO = (FinancialHistoryDTO) request.getData();
+                WorkWithBudgetImpl workWithBudget = new WorkWithBudgetImpl();
+                return workWithBudget.saveFinancial(financialHistoryDTO);
+            }
+            case BACK_CLOTHES: {
+                String clothes = (String) request.getData();
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.backClothes(clothes);
             }
             default: {
                 return new Response(-1, null);

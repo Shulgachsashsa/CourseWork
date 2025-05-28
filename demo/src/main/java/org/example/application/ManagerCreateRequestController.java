@@ -235,6 +235,14 @@ public class ManagerCreateRequestController {
                 convertToCustomString(clothesItems),
                 RequestStatus.PENDING);
         reqInBd(requestDTO, CommandType.REQUEST_CLOTHES);
+        String clothes = requestDTO.getClothesDetails();
+        Request request1 = new Request(CommandType.MINES_CLOTHES, clothes);
+        try {
+            getOut().writeObject(request1);
+            Response response1 = (Response) getIn().readObject();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         clothesItems.clear();
         reasonField.clear();
         quantityField.clear();

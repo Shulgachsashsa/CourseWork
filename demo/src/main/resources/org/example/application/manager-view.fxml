@@ -35,7 +35,7 @@
                   <Image url="@../../../images/fs-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button fx:id="buttonWorkWithRequests1" layoutX="24.0" layoutY="153.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="410.0" style="-fx-background-color: #2F4F4F;" text="Посмотреть историю своих запросов" textFill="WHITE">
+            <Button fx:id="buttonWorkWithClothes" layoutX="24.0" layoutY="153.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="410.0" style="-fx-background-color: #2F4F4F;" text="Посмотреть историю своих запросов" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>

@@ -30,11 +30,12 @@ public class WorkWithClothesImpl {
                     requestDTO.getRequestStatus());
             TransactionHibernate.createRequestOnTheClothes(request);
             RequestHistory requestHistory = new RequestHistory(
-                    TransactionHibernate.findByID(requestDTO.getUserId()).getId(),
+                    TransactionHibernate.findByID(requestDTO.getUserId()),
                     requestDTO.getRequestType(),
                     requestDTO.getClothesDetails(),
                     requestDTO.getRequestStatus(),
-                    requestDTO.getReason());
+                    requestDTO.getReason(),
+                    request);
             TransactionHibernate.addReqOnTheLog(requestHistory);
             return new Response(1, "");
         } catch (Exception e) {
@@ -49,11 +50,12 @@ public class WorkWithClothesImpl {
                     requestDTO.getRequestStatus());
             TransactionHibernate.createRequestOnTheBudget(request);
             RequestHistory requestHistory = new RequestHistory(
-                    TransactionHibernate.findByID(requestDTO.getUserId()).getId(),
+                    TransactionHibernate.findByID(requestDTO.getUserId()),
                     requestDTO.getRequestType(),
                     requestDTO.getAmount(),
                     requestDTO.getRequestStatus(),
-                    requestDTO.getReason());
+                    requestDTO.getReason(),
+                    request);
             TransactionHibernate.addReqOnTheLog(requestHistory);
             return new Response(1, "");
         } catch (Exception e) {
@@ -61,6 +63,11 @@ public class WorkWithClothesImpl {
         }
     }
 
-
+    public Response minesClothes(String clothes) {
+        if (TransactionHibernate.reqMinesClothes(clothes) == true)
+            return new Response(1, "true");
+        else
+            return new Response(-1, "false");
+    }
 
 }

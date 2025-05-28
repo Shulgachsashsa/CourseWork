@@ -4,6 +4,7 @@ import enums.RequestStatus;
 import enums.RequestType;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "request")
@@ -35,6 +36,9 @@ public class Request {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "requestId")
+    private List<RequestHistory> requestHistories;
 
     public Request(User user, RequestType type, String clothesDetails, String reason, RequestStatus status) {
         this.user = user;

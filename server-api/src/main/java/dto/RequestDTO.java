@@ -5,15 +5,33 @@ import enums.RequestStatus;
 import enums.RequestType;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class RequestDTO implements Serializable {
+    private Long id;
     private Long userId;
     private RequestType requestType;
     private String reason;
     private String clothesDetails;
     private RequestStatus requestStatus;
     private Double amount;
+    private LocalDateTime createdAt;
+
+    public RequestDTO(Long id, Long userId, RequestType requestType, String reason, String clothesDetails, RequestStatus requestStatus, Double amount) {
+        this.id = id;
+        this.userId = userId;
+        this.requestType = requestType;
+        this.reason = reason;
+        this.clothesDetails = clothesDetails;
+        this.requestStatus = requestStatus;
+        this.amount = amount;
+    }
+
+    public RequestDTO(Long id, RequestStatus status) {
+        this.id = id;
+        this.requestStatus = status;
+    }
 
     public RequestDTO(Long userId, RequestType requestType, String reason, String clothesDetails, RequestStatus requestStatus) {
         this.userId = userId;
@@ -32,6 +50,22 @@ public class RequestDTO implements Serializable {
     }
 
     public RequestDTO() {
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getAmount() {

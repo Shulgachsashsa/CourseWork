@@ -35,6 +35,7 @@ public class ManagerAppController {
         assert buttonWorkWithRequests != null : "fx:id=\"buttonWorkWithRequests\" was not injected: check your FXML file 'manager-view.fxml'.";
         buttonExit.setOnAction(event -> loadMainMenu());
         buttonWorkWithRequests.setOnAction(event -> loadMenuWorkWithRequests());
+        buttonWorkWithClothes.setOnAction(event -> loadMenuCheckHistory());
     }
 
     private void loadMainMenu() {
@@ -61,6 +62,22 @@ public class ManagerAppController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Работа с запросами");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Ошибка", "Не удалось загрузить меню с запросами!");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMenuCheckHistory() {
+        try {
+            Stage currentStage = (Stage) buttonWorkWithClothes.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("manager-view-history.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("История запросов");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

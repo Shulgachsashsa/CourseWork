@@ -31,12 +31,23 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Request> requests;
 
+    @OneToMany(mappedBy = "processedBy")
+    private List<FinancialHistory> processedOperations;
+
+    @OneToMany(mappedBy = "user")
+    private List<RequestHistory> requestHistories;
+
     public User(String name, String hash, String salt, String access, Role role) {
         this.name = name;
         this.hash = hash;
         this.salt = salt;
         this.access = access;
         this.role = role;
+    }
+
+    public User(String name, String access) {
+        this.name = name;
+        this.access = access;
     }
 
     public User() {

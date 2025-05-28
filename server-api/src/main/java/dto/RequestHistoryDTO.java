@@ -1,58 +1,25 @@
-package entity;
+package dto;
 
 import enums.RequestStatus;
 import enums.RequestType;
-import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "request_history")
-public class RequestHistory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user; // Кто создал запрос
-
-    @ManyToOne
-    @JoinColumn(name = "user_accountant_id")
-    private User accountantUser;
-
-    @ManyToOne
-    @JoinColumn(name = "request_id")
-    private Request requestId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+public class RequestHistoryDTO implements Serializable {
+    private Long user; // Кто создал запрос
+    private Long accountantUser;
     private RequestType type; // MONEY или CLOTHES
-
-    @Column
     private Double amount; // Для денежных запросов
-
-    @Column(columnDefinition = "TEXT")
     private String details; // Детали запроса в JSON
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private RequestStatus status; // PENDING, APPROVED, REJECTED
-
-    @Column
     private LocalDateTime createdAt; // Дата создания
-
-    @Column
     private LocalDateTime processedAt; // Дата обработки
-
-    @Column(length = 500)
     private String accountantComment; // Комментарий админа
-
-    @Column(length = 500)
     private String reason;
+    private Long requestID;
 
-    public RequestHistory() {}
-
-    public RequestHistory(User user, User accountantUser, RequestType type, Double amount, String details, RequestStatus status, LocalDateTime createdAt, LocalDateTime processedAt, String accountantComment, String reason, Request requestId) {
+    public RequestHistoryDTO(Long user, Long accountantUser, RequestType type, Double amount, String details, RequestStatus status, LocalDateTime createdAt, LocalDateTime processedAt, String accountantComment, String reason) {
         this.user = user;
         this.accountantUser = accountantUser;
         this.type = type;
@@ -63,43 +30,39 @@ public class RequestHistory {
         this.processedAt = processedAt;
         this.accountantComment = accountantComment;
         this.reason = reason;
-        this.requestId = requestId;
     }
 
-    public RequestHistory(User user, RequestType type, Double amount, RequestStatus status, String reason, Request requestId) {
-        this.user = user;
-        this.type = type;
-        this.amount = amount;
+    public RequestHistoryDTO(Long accountantUser, RequestStatus status, LocalDateTime processedAt, String accountantComment, LocalDateTime createdAt, Long requestID) {
+        this.accountantUser = accountantUser;
         this.status = status;
-        this.reason = reason;
-        this.createdAt = LocalDateTime.now();
-        this.requestId = requestId;
+        this.processedAt = processedAt;
+        this.accountantComment = accountantComment;
+        this.requestID = requestID;
     }
 
-    public RequestHistory(User user, RequestType type, String details, RequestStatus status, String reason, Request requestId) {
-        this.user = user;
-        this.type = type;
-        this.details = details;
+    public RequestHistoryDTO(Long accountantUser, RequestStatus status, LocalDateTime processedAt, LocalDateTime createdAt, Long requestID) {
+        this.accountantUser = accountantUser;
         this.status = status;
-        this.reason = reason;
-        this.createdAt = LocalDateTime.now();
-        this.requestId = requestId;
+        this.processedAt = processedAt;
+        this.requestID = requestID;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public RequestHistoryDTO() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
+    public Long getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Long user) {
         this.user = user;
+    }
+
+    public Long getAccountantUser() {
+        return accountantUser;
+    }
+
+    public void setAccountantUser(Long accountantUser) {
+        this.accountantUser = accountantUser;
     }
 
     public RequestType getType() {
@@ -166,19 +129,11 @@ public class RequestHistory {
         this.reason = reason;
     }
 
-    public User getAccountantUser() {
-        return accountantUser;
+    public Long getRequestID() {
+        return requestID;
     }
 
-    public void setAccountantUser(User accountantUser) {
-        this.accountantUser = accountantUser;
-    }
-
-    public Request getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(Request requestId) {
-        this.requestId = requestId;
+    public void setRequestID(Long requestID) {
+        this.requestID = requestID;
     }
 }
