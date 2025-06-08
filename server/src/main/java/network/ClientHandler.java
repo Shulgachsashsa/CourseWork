@@ -139,6 +139,15 @@ public class ClientHandler implements Runnable {
                 WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
                 return workWithReqHistory.backClothes(clothes);
             }
+            case GET_REQUEST_BY_ID_PROCESS: {
+                Long dataset = (Long) request.getData();
+                WorkWithReqHistory workWithReqHistory = new WorkWithReqHistory();
+                return workWithReqHistory.getListReqByIdProcess(dataset);
+            }
+            case GET_FINANCIAL_HISTORY: {
+                WorkWithBudgetImpl workWithBudget = new WorkWithBudgetImpl();
+                return workWithBudget.getFinancialHistory();
+            }
             default: {
                 return new Response(-1, null);
             }

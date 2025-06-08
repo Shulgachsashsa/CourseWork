@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.application.AccountantCheckHistoryReqController"
-            prefHeight="400.0" prefWidth="700.0">
+<VBox prefHeight="593.0" prefWidth="1300.0" spacing="10" style="-fx-padding: 10; -fx-background-color: #f5f5f5;"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.application.AccountantCheckHistoryReqController">
 
-</AnchorPane>
+    <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"
+           text="История запросов" />
+
+    <TableView fx:id="requestHistoryTable" prefHeight="500" prefWidth="900" style="-fx-font-size: 14px;">
+        <columns>
+            <TableColumn prefWidth="100" text="ID пользователя">
+                <cellValueFactory><PropertyValueFactory property="user"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="ID бухгалтера">
+                <cellValueFactory><PropertyValueFactory property="accountantUser"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="Тип запроса">
+                <cellValueFactory><PropertyValueFactory property="type"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="80" text="Сумма">
+                <cellValueFactory><PropertyValueFactory property="amount"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150" text="Детали">
+                <cellValueFactory><PropertyValueFactory property="details"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="Статус">
+                <cellValueFactory>
+                    <PropertyValueFactory property="status"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150" text="Дата создания">
+                <cellValueFactory><PropertyValueFactory property="createdAt"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150" text="Дата обработки">
+                <cellValueFactory><PropertyValueFactory property="processedAt"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="200" text="Комментарий">
+                <cellValueFactory><PropertyValueFactory property="accountantComment"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="200" text="Причина">
+                <cellValueFactory><PropertyValueFactory property="reason"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button onAction="#handleFilter" style="-fx-background-color: #FFA500; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Фильтр по статусу" />
+        <Button onAction="#handleRefresh" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Обновить" />
+        <Button onAction="#handleBack" style="-fx-background-color: #4a8bc9; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Назад" />
+    </HBox>
+</VBox>

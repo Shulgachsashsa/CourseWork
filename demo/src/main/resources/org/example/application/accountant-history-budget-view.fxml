@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.application.AccountantCheckHistoryBudgetController"
-            prefHeight="400.0" prefWidth="700.0">
+<VBox prefHeight="600.0" prefWidth="1000.0" spacing="10" style="-fx-padding: 10; -fx-background-color: #f5f5f5;"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.application.AccountantCheckHistoryBudgetController">
 
-</AnchorPane>
+    <Label alignment="CENTER" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"
+           text="История финансовых операций" />
+
+    <TableView fx:id="financialHistoryTable" prefHeight="500" prefWidth="900" style="-fx-font-size: 14px;">
+        <columns>
+            <TableColumn prefWidth="80" text="ID">
+                <cellValueFactory><PropertyValueFactory property="id"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="120" text="Изменение суммы">
+                <cellValueFactory><PropertyValueFactory property="amountChange"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="120" text="Новый баланс">
+                <cellValueFactory><PropertyValueFactory property="newBalance"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="Обработано">
+                <cellValueFactory><PropertyValueFactory property="processedBy"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="100" text="ID запроса">
+                <cellValueFactory><PropertyValueFactory property="requestId"/></cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="150" text="Дата операции">
+                <cellValueFactory><PropertyValueFactory property="operationDate"/></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button onAction="#handleExportToExcel" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Экспорт в Excel" />
+        <Button onAction="#handleRefresh" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Обновить" />
+        <Button onAction="#handleBack" style="-fx-background-color: #4a8bc9; -fx-text-fill: white; -fx-font-weight: bold;"
+                text="Назад" />
+    </HBox>
+</VBox>

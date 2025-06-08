@@ -1,11 +1,5 @@
 package dto;
 
-import enums.RequestStatus;
-import enums.RequestType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -15,6 +9,8 @@ public class FinancialHistoryDTO implements Serializable {
     private Long processedBy;
     private String comment;
     private Long requestId;
+    private Long id;
+    private LocalDateTime operationDate;
 
     public FinancialHistoryDTO(Double amountChange, Double newBalance, Long processedBy, String comment, Long requestId) {
         this.amountChange = amountChange;
@@ -22,6 +18,16 @@ public class FinancialHistoryDTO implements Serializable {
         this.processedBy = processedBy;
         this.comment = comment;
         this.requestId = requestId;
+    }
+
+    public FinancialHistoryDTO(Double amountChange, Double newBalance, Long processedBy, String comment, Long requestId, Long id, LocalDateTime operationDate) {
+        this.amountChange = amountChange;
+        this.newBalance = newBalance;
+        this.processedBy = processedBy;
+        this.comment = comment;
+        this.requestId = requestId;
+        this.id = id;
+        this.operationDate = operationDate;
     }
 
     public Double getAmountChange() {
@@ -62,5 +68,21 @@ public class FinancialHistoryDTO implements Serializable {
 
     public void setRequestId(Long requestId) {
         this.requestId = requestId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getOperationDate() {
+        return operationDate;
+    }
+
+    public void setOperationDate(LocalDateTime operationDate) {
+        this.operationDate = operationDate;
     }
 }

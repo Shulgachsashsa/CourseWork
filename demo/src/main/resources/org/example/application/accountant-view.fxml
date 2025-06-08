@@ -27,11 +27,6 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="buttonWorkWithBudget" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="415.0" style="-fx-background-color: #2F4F4F;" text="Работа с бюджетом " textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="buttonExit" layoutX="185.0" layoutY="339.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="326.0" style="-fx-background-color: #e42121;" styleClass="buttonExit" text="ВЫЙТИ" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
@@ -48,6 +43,11 @@
                      </font>
                   </Button>
                   <Button fx:id="buttonCheckHistoryReq" layoutX="14.0" layoutY="169.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="415.0" style="-fx-background-color: #2F4F4F;" text="Просмотреть историю запросов" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonCheckBudget" layoutX="14.0" layoutY="276.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="415.0" style="-fx-background-color: #2F4F4F;" text="Посмотреть текущий бюджет" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

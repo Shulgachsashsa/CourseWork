@@ -296,4 +296,27 @@ public class TransactionHibernate {
         }
     }
 
+    public static List<RequestHistory> getReqByProcessId(Long id) {
+            if (id == null) {
+                throw new IllegalArgumentException("User ID cannot be null");
+            }
+            try (Session session = sessionFactory.openSession()) {
+                return session.createQuery(
+                                "FROM RequestHistory rh WHERE rh.accountantUser.id = :user_accountant_id",
+                                RequestHistory.class)
+                        .setParameter("user_accountant_id", id)
+                        .getResultList();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to fetch request history", e);
+            }
+    }
+
+    public static List<FinancialHistory> getFinancialHistoryBudget() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createNativeQuery("SELECT * FROM financial_history",
+                    FinancialHistory.class).getResultList();
+        }
+    }
+
 }

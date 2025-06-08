@@ -116,4 +116,29 @@ public class WorkWithReqHistory {
             throw new RuntimeException(e);
         }
     }
+
+    public Response getListReqByIdProcess(Long id) {
+        try {
+            List<RequestHistory> listSQL = TransactionHibernate.getReqByProcessId(id);
+            List<RequestHistoryDTO> listDTO = new ArrayList<>();
+            for (RequestHistory req : listSQL) {
+                RequestHistoryDTO requestHistoryDTO = new RequestHistoryDTO(
+                        req.getUser().getId(),
+                        req.getAccountantUser() != null ? req.getAccountantUser().getId() : null,
+                        req.getType(),
+                        req.getAmount(),
+                        req.getDetails(),
+                        req.getStatus(),
+                        req.getCreatedAt(),
+                        req.getProcessedAt(),
+                        req.getAccountantComment(),
+                        req.getReason()
+                );
+                listDTO.add(requestHistoryDTO);
+            }
+            return new Response(1, listDTO);
+        } catch (Exception e) {
+            return new Response(0, "");
+        }
+    }
 }

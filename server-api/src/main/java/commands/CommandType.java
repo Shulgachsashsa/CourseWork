@@ -20,8 +20,6 @@ public enum CommandType {
     ADD_BUDGET,
     SAVE_FINANCIAL_HISTORY,
     BACK_CLOTHES,
-
-
-
-
+    GET_REQUEST_BY_ID_PROCESS,
+    GET_FINANCIAL_HISTORY
 }

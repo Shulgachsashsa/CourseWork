@@ -7,6 +7,8 @@ import entity.Request;
 import entity.User;
 import workWithHibernate.TransactionHibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,4 +63,24 @@ public class WorkWithBudgetImpl {
         TransactionHibernate.saveFinancialHistory(financialHistory);
         return new Response(1, null);
     }
+
+    public Response getFinancialHistory() {
+        try {
+            List<FinancialHistory> list = TransactionHibernate.getFinancialHistoryBudget();
+            List<FinancialHistoryDTO> listDTO = new ArrayList<>();
+            for (FinancialHistory financialHistory: list) {
+                listDTO.add(new FinancialHistoryDTO(financialHistory.getAmountChange(),
+                        financialHistory.getNewBalance(),
+                        financialHistory.getProcessedBy().getId(),
+                        financialHistory.getComment(),
+                        financialHistory.getRequest().getId(),
+                        financialHistory.getId(),
+                        financialHistory.getOperationDate()));
+            }
+            return new Response(1, listDTO);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+

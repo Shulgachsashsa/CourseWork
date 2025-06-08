@@ -38,6 +38,9 @@ public class FinancialHistory {
         this.comment = comment;
     }
 
+    public FinancialHistory() {
+    }
+
     public Long getId() {
         return id;
     }
